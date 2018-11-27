@@ -31,6 +31,9 @@ install:
 jdbc_driver:
 	cd src/jdbc; make $@
 
+local:
+	cp src/$(LIBNAME) /work/t20/litestar_luaserver/src/bin/luasql/
+
 clean:
 	rm -f src/$(LIBNAME) src/*.o
 

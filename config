@@ -15,16 +15,16 @@ T= mysql
 PREFIX = /usr/local
 
 # System's libraries directory (where binary libraries are installed)
-LUA_LIBDIR= $(PREFIX)/lib/lua/5.1
+LUA_LIBDIR= $(PREFIX)/lib/lua/5.3
 
 # System's lua directory (where Lua libraries are installed)
-LUA_DIR= $(PREFIX)/share/lua/5.1
+LUA_DIR= $(PREFIX)/share/lua/5.3
 
 # Lua includes directory
 LUA_INC= $(PREFIX)/include
 
 # Lua version number (first and second digits of target version)
-LUA_VERSION_NUM= 501
+LUA_VERSION_NUM= 503
 
 # OS dependent
 LIB_OPTION= -shared #for Linux
@@ -37,8 +37,11 @@ LIBNAME= $T.so
 ######## MySQL
 #DRIVER_LIBS= -L/usr/local/mysql/lib -lmysqlclient -lz
 #DRIVER_INCS= -I/usr/local/mysql/include
-DRIVER_LIBS= -L/usr/lib -lmysqlclient -lz
+#DRIVER_LIBS= -L/usr/lib -lmysqlclient -lz
+#DRIVER_INCS= -I/usr/include/mysql
+DRIVER_LIBS= -L/usr/lib64/mysql/ -lmysqlclient -lz
 DRIVER_INCS= -I/usr/include/mysql
+
 ######## Oracle OCI8
 #DRIVER_LIBS= -L/home/oracle/OraHome1/lib -lz -lclntsh
 #DRIVER_INCS= -I/home/oracle/OraHome1/rdbms/demo -I/home/oracle/OraHome1/rdbms/public
@@ -60,7 +63,8 @@ DRIVER_INCS= -I/usr/include/mysql
 #DRIVER_LIBS= -L/usr/local/firebird -lfbclient
 #DRIVER_INCS=
 
-WARN= -Wall -Wmissing-prototypes -Wmissing-declarations -ansi -pedantic
+# WARN= -Wall -Wmissing-prototypes -Wmissing-declarations -ansi -pedantic
+WARN= -Wall -Wmissing-prototypes -Wmissing-declarations -pedantic
 INCS= -I$(LUA_INC)
 CFLAGS= -O2 $(WARN) -fPIC $(DRIVER_INCS) $(INCS) -DLUASQL_VERSION_NUMBER='"$V"' $(DEFS)
 CC= gcc
